@@ -28,3 +28,5 @@ The data is not deleted when the browser is closed, and are available for future
 
 2. Local Storage setup
 - useEffect to get todos
+
+// 1.13
