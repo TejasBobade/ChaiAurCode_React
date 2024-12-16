@@ -123,3 +123,9 @@ export default conf;
 // 7.23 -> pages
 
 // 7.44 -> routing
+
+// 7.50 -> debugging
+
+// 8.04 -> add integration platform in appwrite -> web
+
+// 8.10 -> Todos
