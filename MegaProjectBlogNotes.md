@@ -129,3 +129,11 @@ export default conf;
 // 8.04 -> add integration platform in appwrite -> web
 
 // 8.10 -> Todos
+
+// 8.20 -> futher guide
+- Frontend -> React App
+- Backend -> Appwrite
+- Signup , login , logout , redux/context , routing , CRUD - Text , file handling
+- Auth , Database , file management
+
+- freeApi.app 

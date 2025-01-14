@@ -16,36 +16,36 @@ function PostForm({post}) {
     })
 
     const navigate = useNavigate()
-    const userData = useSelector(state => state.user.userData)
+    const userData = useSelector((state) => state.auth.userData)
 
     const submit = async (data) => {
         if (post){
-            const file = data.image[0] ? appwriteService.uploadFile(data.image[0]): null
+            const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]): null;
 
             if (file) {
-                appwriteService.deleteFile(post.featuredImage)
+                appwriteService.deleteFile(post.featuredImage);
             }
 
             const dbPost = await appwriteService.updatePost(post.$id,{
                 ...data,
                 featuredImage: file ? file.$id : undefined,
-            })
+            });
             if (dbPost) {
-                navigate(`/post/${dbPost.$id}`)
+                navigate(`/post/${dbPost.$id}`);
             }
         }else {
             //TODO: chack the funtionality for refrence see above 
             const file = await appwriteService.uploadFile(data.image[0]);
 
             if (file) {
-                const fileId = file.$id 
-                data.featuredImage = fileId
+                const fileId = file.$id ;
+                data.featuredImage = fileId;
                 const dbPost = await appwriteService.createPost({
                     ...data,
-                    userId: userData.data,
-                })
+                    userId: userData.$id
+                });
                 if (dbPost) {
-                    navigate(`/post/${dbPost.$id}`)
+                    navigate(`/post/${dbPost.$id}`);
                 }
             }
         }
@@ -60,21 +60,21 @@ function PostForm({post}) {
             .replace(/[^a-zA-Z\d\s]+/g, "-")
             .replace(/\s/g, "-");
 
-            return ''
+        return '';
 
-    }, []) 
+    }, []); 
 
     useEffect(() => {
         const subscription = watch((value, {name}) => {
             if (name === 'title'){
-                setValue('slug', slugTransform(value.title,{shouldValidate: true}))
+                setValue('slug', slugTransform(value.title),{shouldValidate: true});
             }
         })
 
         return () => {
             // Interview
             // used for memory management optimization
-            subscription.unsubscribe()
+            subscription.unsubscribe();
         }
     },[watch, slugTransform, setValue])
     return (
